@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
   </head>
   <body>
-    <h1>orgfarm-262 — Enhanced Chat (MIAWDeployment / MIAWChannel)</h1>
+    <h1>orgfarm-262 — Enhanced Chat (MIAWWithASA → MessagingQueue, HUMAN)</h1>
     <p>
       <a id="editThisPageLink" target="_blank" style="color:blue">Edit this page</a>
     </p>
@@ -13,10 +13,13 @@
     <p>
       <b>Release-262 org</b> (Org Id <code>00DVW000009TofO</code>, cell sdb39) — the more-stable
       replacement for the 264 org. Use THIS client for translation perf testing: it targets the
-      <code>MIAWDeployment</code> / <code>MIAWChannel</code> deployment, which routes to a
-      <b>human agent</b> via Omni-Channel (the Translate world-icon lives on the human agent console).
-      The other 262 deployment (<code>MIAWWithASA</code>) routes to the <b>Agentforce Service Agent
-      bot</b> instead, so a session there never reaches the Omni inbox — wrong target for this work.
+      <code>MIAWWithASA</code> deployment, whose channel routes <code>sessionHandlerType=Queue</code>
+      straight to <code>MessagingQueue</code> — a <b>human agent</b> via Omni-Channel (the Translate
+      world-icon lives on the human agent console).
+      <b>NAMING IS INVERTED vs the 264 org:</b> on 262 the <code>MIAWDeployment</code> /
+      <code>MIAWChannel</code> deployment routes through flow <code>Route_to_Astro_Enhanced</code> to
+      the <b>Astro Enhanced bot</b> (session owner "Automated Process", never reaches the Omni inbox) —
+      so despite the "ASA" name, <code>MIAWWithASA</code> is the human one here.
     </p>
     <p>
       Click the chat widget (bottom-right) and send an inbound message <b>in the selected non-English
@@ -55,8 +58,8 @@
 
           embeddedservice_bootstrap.init(
             "00DVW000009TofO",
-            "MIAWDeployment",
-            "https://orgfarm-c29a300ed6.test1.my.pc-rnd.site.com/ESWMIAWDeployment1708425345105",
+            "MIAWWithASA",
+            "https://orgfarm-c29a300ed6.test1.my.pc-rnd.site.com/ESWMIAWWithASA1740133948324",
             {
               scrt2URL: "https://orgfarm-c29a300ed6.test1.my.pc-rnd.salesforce-scrt.com"
             }
@@ -68,7 +71,7 @@
     </script>
     <script
       type="text/javascript"
-      src="https://orgfarm-c29a300ed6.test1.my.pc-rnd.site.com/ESWMIAWDeployment1708425345105/assets/js/bootstrap.min.js"
+      src="https://orgfarm-c29a300ed6.test1.my.pc-rnd.site.com/ESWMIAWWithASA1740133948324/assets/js/bootstrap.min.js"
       onload="initEmbeddedMessaging()">
     </script>
   </body>
