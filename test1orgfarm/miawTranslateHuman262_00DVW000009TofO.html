@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<html>
+  <head>
+    <title>MIAW Client (HUMAN-routed) — 262 orgfarm-262 (translation perf)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+  </head>
+  <body>
+    <h1>orgfarm-262 — Enhanced Chat (MIAWDeployment / MIAWChannel)</h1>
+    <p>
+      <a id="editThisPageLink" target="_blank" style="color:blue">Edit this page</a>
+    </p>
+    <script>document.getElementById('editThisPageLink').href = "https://github.com/perfengservicecloud/perfengservicecloud.github.io/edit/main" + window.location.pathname;</script>
+    <p>
+      <b>Release-262 org</b> (Org Id <code>00DVW000009TofO</code>, cell sdb39) — the more-stable
+      replacement for the 264 org. Use THIS client for translation perf testing: it targets the
+      <code>MIAWDeployment</code> / <code>MIAWChannel</code> deployment, which routes to a
+      <b>human agent</b> via Omni-Channel (the Translate world-icon lives on the human agent console).
+      The other 262 deployment (<code>MIAWWithASA</code>) routes to the <b>Agentforce Service Agent
+      bot</b> instead, so a session there never reaches the Omni inbox — wrong target for this work.
+    </p>
+    <p>
+      Click the chat widget (bottom-right) and send an inbound message <b>in the selected non-English
+      language</b> (e.g. Spanish "Hola, necesito ayuda con mi pedido") to trigger language detection and
+      the agent-side Translate world-icon. The picker sets the END-USER (customer) locale; the agent
+      works in English. Choose en_US as a control case where the icon should NOT appear.
+    </p>
+    <p>
+      End-user language:
+      <select id="langSel">
+        <option value="es">Spanish (es)</option>
+        <option value="de">German (de)</option>
+        <option value="fr">French (fr)</option>
+        <option value="ja">Japanese (ja)</option>
+        <option value="en_US">English (en_US) — control</option>
+      </select>
+      <button onclick="location.reload()">Reload with selection</button>
+    </p>
+    <script type="text/javascript">
+      (function () {
+        var saved = sessionStorage.getItem("miawLang") || "es";
+        window.addEventListener("DOMContentLoaded", function () {
+          var sel = document.getElementById("langSel");
+          if (!sel) return;
+          sel.value = saved;
+          sel.addEventListener("change", function () {
+            sessionStorage.setItem("miawLang", sel.value);
+          });
+        });
+      })();
+
+      function initEmbeddedMessaging() {
+        try {
+          embeddedservice_bootstrap.settings.language =
+            sessionStorage.getItem("miawLang") || "es";
+
+          embeddedservice_bootstrap.init(
+            "00DVW000009TofO",
+            "MIAWDeployment",
+            "https://orgfarm-c29a300ed6.test1.my.pc-rnd.site.com/ESWMIAWDeployment1708425345105",
+            {
+              scrt2URL: "https://orgfarm-c29a300ed6.test1.my.pc-rnd.salesforce-scrt.com"
+            }
+          );
+        } catch (err) {
+          console.error("Error loading Embedded Messaging: ", err);
+        }
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://orgfarm-c29a300ed6.test1.my.pc-rnd.site.com/ESWMIAWDeployment1708425345105/assets/js/bootstrap.min.js"
+      onload="initEmbeddedMessaging()">
+    </script>
+  </body>
+</html>
